@@ -1,0 +1,9 @@
+﻿* SHA512 Hash over all CoreChain validations
+
+* Decouple DataChain from CoreChain, DataChains should be able to run without the core chain. Option to setup up the required chain keys in Config, query required stuff from a sidechain node
+* Implement DataChain DataIndex
+
+
+* How the account management in Heleus works (key server)
+* How the Heleus backend works (combine server/database backend)
+* The different types of chains

@@ -1,0 +1,27 @@
+Requirements
+
+1. Every member has a unique zero-based index (0 .. number of members - 1) that is shared with all the other members.
+2. Messages are signed with a digital signature. Every member has a unique key pair and broadcasts the public key with the other members. 
+3. All council members are connected to each other. This is not a strict requirement, but helps to reduces lag.
+4. Transactions are collected and broadcasted to all the other members. All the time, independently of the current state.
+
+
+1. Every council member starts a new voting process. The current block id is increased by one and the revision counter is set to zero.
+
+2. The first phase of the current voting round starts.
+
+3. A simple timer starts. When the timer runs out, all the collected and valid transactions are bundled to a new block with the new block id and the revision counter and shared with all the other members as a proposal. As the issuer of the block, the member also broadcasts a positive vote for this block.
+
+When the timer runs out and there is already a certain amount of legit proposals available the members acknowledges that by sending an "empty" block and a negative vote. 
+
+4. The other members that receive the proposal analyse it and broadcast their positive or negative vote to all the other members.
+
+5. When a certain amount of legit proposals are collected or all members broadcasted their proposals or a timer runs out the first phase ends.
+
+6. If there are no legit proposals, the revision counter is increased by one the process continues with step 3.
+
+7. The second phase of the current voting round starts.
+
+8. Every member now has one vote. The goal is to get a majority for only one proposal. Usually, the proposal with the most transactions wins. Otherwise the proposal with the shortest positive distance between the block id mod number of members and the unique zero-based index from the proposer.
+
+9. A simple timer starts. If the majority voted for a proposal it will be broadcasted as a new block and a new vote process starts with step 1. If no majority is achieved or the timer runs out, the revision counter is increased by one and the process continues with step 3.
