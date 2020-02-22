@@ -339,7 +339,7 @@ namespace Heleus.Network.Server
             {
                 if (connection.NodeInfo == null && message.MessageType != (ushort)NodeMessageTypes.NodeInfo)
                 {
-                    Log.Warn($"Invalid message received {message.GetType().Name}.");
+                    Log.Trace($"Invalid message received {message.GetType().Name}.");
                     await connection.Close(DisconnectReasons.ProtocolError);
                     return;
                 }
@@ -348,7 +348,7 @@ namespace Heleus.Network.Server
                 {
                     if (!message.IsMessageValid(connection.NodeInfo.NodeKey))
                     {
-                        Log.Warn($"Invalid message received {message.GetType().Name}.");
+                        Log.Trace($"Invalid message received {message.GetType().Name}.");
                         await connection.Close(DisconnectReasons.ProtocolError);
                         return;
                     }
@@ -421,14 +421,14 @@ namespace Heleus.Network.Server
 
             if (!message.IsMessageValid(message.NodeInfo.NodeKey))
             {
-                Log.Warn($"Invalid message received {message.GetType().Name}.");
+                Log.Trace($"Invalid message received {message.GetType().Name}.");
                 await connection.Close(DisconnectReasons.ProtocolError);
                 return;
             }
 
             if (message.ReceiverNodeId != _kademlia.LocalId)
             {
-                Log.Warn($"NodeId invalid {message.GetType().Name}.");
+                Log.Trace($"NodeId invalid {message.GetType().Name}.");
                 await connection.Close(DisconnectReasons.ProtocolError);
                 return;
             }
